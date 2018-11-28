@@ -26,9 +26,10 @@ export default class OpportunityList extends Component {
     _loadData() {
         if (this.state.data == null) {
             const data = this.props.opportunities.map((opportunity, i) => {
+                console.log(opportunity.timeCommitment)
                 return {
                     name: opportunity.label,
-                    time: opportunity.time_commitment,
+                    time: opportunity.timeCommitment,
                     steps: JSON.stringify(opportunity.steps)
                 }
             })

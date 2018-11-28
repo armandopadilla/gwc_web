@@ -5,6 +5,7 @@ import OpportunityMap from './components/OpportunityMap'
 import YAML from 'yamljs'
 import f from './testdata.yml'
 import OpportunityDetails from './components/OpportunityDetails';
+import axios from 'axios';
 
 export default class App extends Component {
 
@@ -28,9 +29,11 @@ export default class App extends Component {
         .then(response => response.json())
         .then(data => this.setState({ opportunities: data }));
     } else {
-      const file = YAML.load(f)    
-      console.debug(file)
-      this.setState({opportunities: file})  
+      axios
+        .get('https://deiee83toe.execute-api.us-east-1.amazonaws.com/dev/opportunity/list')
+        .then(response => {
+          this.setState({opportunities: response.data})
+        });
     }
   }
 
